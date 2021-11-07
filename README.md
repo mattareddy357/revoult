@@ -42,7 +42,7 @@ Test_3:
 
 
 ## Produce system diagram to above solution
-- Please find the diagram in Capture.jpg 
+- Please find the diagram in Flow-diagram.jpg 
 
 
 ## Configuration scripts are added for EKS deployment 
