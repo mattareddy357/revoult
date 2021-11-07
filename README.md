@@ -34,7 +34,7 @@ Test_3:
   "message": "Hello, Test_uesr3! Happy birthday!"
 
 
-## Dockerisation
+## Docker Implementation
 - run Dockerfile  with 'docker build -t <sample-app> .'
 - docker login to your registry 'docker login'
 - do the tag for docker image with 'docker tag <sample-app> <name>'
