@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${APP_NAME}
+  labels:
+   app: ${APP_NAME}
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ${APP_NAME}
+  revisionHistoryLimit: 2
+  template:
+    metadata:
+      labels:
+        app: ${APP_NAME}
+        tier: ${APP_LABEL_TIER}
+    spec:
+      containers:
+      - name: ${APP_NAME}
+        image: "${DOCKER_REGISTRY_SERVER}/${DOCKER_IMAGE_NAME}:${TAG}"
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: ${HEALTHCHECK}
+            port: 80
+          periodSeconds: 5
+          initialDelaySeconds: 10
+          timeoutSeconds: 10
+        resources:
+          limits:
+            cpu: 1
+            memory: 512Mi
+          requests:
+            cpu: 0.5
+            memory: 256Mi
+      imagePullSecrets:
+      - name: dockersecret
+      nodeSelector:
+        beta.kubernetes.io/os: linux
